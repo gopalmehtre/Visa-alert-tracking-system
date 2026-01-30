@@ -118,3 +118,50 @@ curl -X POST http://localhost:8000/alerts \
 - MongoDB integration via Mongoose — implemented
 ---
 Thank you for reviewing the Visa Slot Alerts internal tool.
+
+## Setup steps (expanded)
+
+- **Backend**
+  - Create `.env` at `backend/.env` with `PORT` and `MONGO_URI`.
+  - Install and run:
+    ```bash
+    cd backend
+    npm install
+    npm run dev
+    ```
+  - Smoke test the API:
+    ```bash
+    curl http://localhost:8000/alerts
+    ```
+- **Frontend**
+  - Install and run:
+    ```bash
+    cd frontend
+    npm install
+    npm run dev
+    ```
+  - Verify the UI at `http://localhost:5173` and that it can reach the backend.
+- **Local dev tips**
+  - Use separate terminals for frontend and backend. On Windows prefer PowerShell or Windows Terminal.
+  - Use a dedicated development MongoDB database to avoid polluting production data.
+
+## Design decisions
+
+- **Separation of concerns:** routes → controllers → models → middlewares for clarity and testability.
+- **RESTful API:** single resource (`/alerts`) with standard verbs for predictability.
+- **Mongoose:** schema-driven data modeling and basic validation at the data layer.
+- **Lightweight middleware:** request logging, input validation, and a centralized error handler for consistent responses.
+- **Client simplicity:** Vite + React + Axios for fast iteration and a small, maintainable codebase.
+- **Server-side filtering:** support `country` and `status` query filters to minimize client work and network usage.
+
+## What I'd improve for production
+
+- **Security & access:** add authentication/authorization (JWT/OAuth), input sanitization and stricter validation (Joi/Zod), enforce HTTPS, use `helmet`, and enable CORS with a tight whitelist.
+- **Reliability & scaling:** containerize with Docker, provide `docker-compose`/Kubernetes manifests, run multiple instances behind a load balancer, and add health/readiness endpoints.
+- **Performance:** add DB indexes for common queries (`country`, `status`, `date`), paginate list endpoints, and introduce caching (Redis) for frequent reads.
+- **Observability:** structured logging (Winston), centralized log collection (ELK/Datadog), metrics (Prometheus), and tracing (OpenTelemetry/Jaeger).
+- **Resilience & data:** backups for MongoDB, graceful shutdown and retry logic, and schema migration/versioning when needed.
+- **Operational:** add CI/CD pipelines (lint, tests, builds), secrets management (Vault/cloud secret manager), rate limiting, and automated tests (unit, integration, E2E).
+- **UX & features:** notification delivery (email/SMS) via a job queue, optimistic UI and improved error UX, role-based views, and audit logging for changes.
+
+---
