@@ -1,0 +1,46 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+}
+
+.card {
+  background: white;
+  padding: 16px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+}
+
+input,
+select,
+button {
+  padding: 8px;
+  margin: 6px 0;
+  width: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.danger {
+  background: #e74c3c;
+  color: white;
+  margin-left: 6px;
+}
