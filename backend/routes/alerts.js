@@ -6,7 +6,7 @@ const {
   deleteAlert,
 } = require("../controllers/alertController");
 
-const validateAlert = require("../middleware/validateAlert");
+const validateAlert = require("../middlewares/validateAlert");
 
 const router = express.Router();
 

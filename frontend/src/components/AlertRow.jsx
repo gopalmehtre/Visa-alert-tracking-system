@@ -24,7 +24,7 @@ function AlertRow({ alert, onChange }) {
       <td>{alert.status}</td>
       <td>
         <button onClick={handleStatusUpdate}>
-          Toggle Status
+          Change Status
         </button>
         <button className="danger" onClick={handleDelete}>
           Delete

@@ -3,14 +3,14 @@ const express = require("express");
 const cors = require("cors");
 
 const connectDB = require("./config/db");
-const alertRoutes = require("./routes/alertRoutes");
-const logger = require("./middleware/logger");
+const alertRoutes = require("./routes/alerts");
+const logger = require("./middlewares/loggers");
 const errorHandler = require("./utils/errorHandler");
 
 const app = express();
 connectDB();
 
-app.use(cors());
+app.use(cors("*"));
 app.use(express.json());
 app.use(logger);
 app.use("/alerts", alertRoutes);
