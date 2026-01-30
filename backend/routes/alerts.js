@@ -4,7 +4,7 @@ const {
   createAlert,
   updateAlert,
   deleteAlert,
-} = require("../controllers/alertController");
+} = require("../controllers/AlertController");
 
 const validateAlert = require("../middlewares/validateAlert");
 
