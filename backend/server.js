@@ -10,7 +10,7 @@ const errorHandler = require("./utils/errorHandler");
 const app = express();
 connectDB();
 
-app.use(cors("*"));
+app.use(cors());
 app.use(express.json());
 app.use(logger);
 app.use("/alerts", alertRoutes);
