@@ -14,43 +14,55 @@ function AlertForm({ onSuccess }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      await createAlert(form);
-      setForm({ country: "", city: "", visaType: "Tourist" });
-      onSuccess();
-    } catch (error) {
-      alert("Failed to create alert");
-    }
+    await createAlert(form);
+    setForm({ country: "", city: "", visaType: "Tourist" });
+    onSuccess();
   };
 
   return (
-    <form className="card" onSubmit={handleSubmit}>
-      <h3>Create Alert</h3>
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white shadow rounded-lg p-6 mb-8"
+    >
+      <h2 className="text-xl font-semibold mb-4">Create Alert</h2>
 
-      <input
-        name="country"
-        placeholder="Country"
-        value={form.country}
-        onChange={handleChange}
-        required
-      />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <input
+          name="country"
+          placeholder="Country"
+          value={form.country}
+          onChange={handleChange}
+          className="border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
+          required
+        />
 
-      <input
-        name="city"
-        placeholder="City"
-        value={form.city}
-        onChange={handleChange}
-        required
-      />
+        <input
+          name="city"
+          placeholder="City"
+          value={form.city}
+          onChange={handleChange}
+          className="border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
+          required
+        />
 
-      <select name="visaType" value={form.visaType} onChange={handleChange}>
-        <option value="Tourist">Tourist</option>
-        <option value="Business">Business</option>
-        <option value="Student">Student</option>
-      </select>
+        <select
+          name="visaType"
+          value={form.visaType}
+          onChange={handleChange}
+          className="border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
+        >
+          <option>Tourist</option>
+          <option>Business</option>
+          <option>Student</option>
+        </select>
+      </div>
 
-      <button type="submit">Add Alert</button>
+      <button
+        type="submit"
+        className="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+      >
+        Add Alert
+      </button>
     </form>
   );
 }

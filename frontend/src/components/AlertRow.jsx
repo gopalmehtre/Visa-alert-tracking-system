@@ -1,10 +1,9 @@
 import { deleteAlert, updateAlert } from "../api/alertApi";
 
 function AlertRow({ alert, onChange }) {
-  const handleStatusUpdate = async () => {
+  const toggleStatus = async () => {
     const newStatus =
       alert.status === "Active" ? "Booked" : "Active";
-
     await updateAlert(alert._id, { status: newStatus });
     onChange();
   };
@@ -17,16 +16,32 @@ function AlertRow({ alert, onChange }) {
   };
 
   return (
-    <tr>
-      <td>{alert.country}</td>
-      <td>{alert.city}</td>
-      <td>{alert.visaType}</td>
-      <td>{alert.status}</td>
-      <td>
-        <button onClick={handleStatusUpdate}>
+    <tr className="border-t">
+      <td className="p-3">{alert.country}</td>
+      <td className="p-3">{alert.city}</td>
+      <td className="p-3">{alert.visaType}</td>
+      <td className="p-3">
+        <span
+          className={`px-2 py-1 rounded text-sm ${
+            alert.status === "Active"
+              ? "bg-green-100 text-green-700"
+              : "bg-yellow-100 text-yellow-700"
+          }`}
+        >
+          {alert.status}
+        </span>
+      </td>
+      <td className="p-3 space-x-2">
+        <button
+          onClick={toggleStatus}
+          className="bg-indigo-600 text-white px-3 py-1 rounded hover:bg-indigo-700"
+        >
           Change Status
         </button>
-        <button className="danger" onClick={handleDelete}>
+        <button
+          onClick={handleDelete}
+          className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+        >
           Delete
         </button>
       </td>

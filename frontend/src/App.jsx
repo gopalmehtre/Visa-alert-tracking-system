@@ -8,15 +8,10 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   const fetchAlerts = async () => {
-    try {
-      setLoading(true);
-      const data = await getAlerts();
-      setAlerts(data);
-    } catch (error) {
-      console.error("Failed to fetch alerts", error);
-    } finally {
-      setLoading(false);
-    }
+    setLoading(true);
+    const data = await getAlerts();
+    setAlerts(data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -24,16 +19,20 @@ function App() {
   }, []);
 
   return (
-    <div className="container">
-      <h1>Visa Slot Alerts</h1>
+    <div className="min-h-screen p-6">
+      <div className="max-w-5xl mx-auto">
+        <h1 className="text-3xl font-bold mb-6 text-center">
+          Visa Slot Alerts
+        </h1>
 
-      <AlertForm onSuccess={fetchAlerts} />
+        <AlertForm onSuccess={fetchAlerts} />
 
-      {loading ? (
-        <p>Loading alerts...</p>
-      ) : (
-        <AlertList alerts={alerts} onChange={fetchAlerts} />
-      )}
+        {loading ? (
+          <p className="text-center mt-6">Loading alerts...</p>
+        ) : (
+          <AlertList alerts={alerts} onChange={fetchAlerts} />
+        )}
+      </div>
     </div>
   );
 }
